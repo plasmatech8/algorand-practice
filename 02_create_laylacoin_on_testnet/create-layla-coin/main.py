@@ -6,7 +6,7 @@ from algosdk.future.transaction import write_to_file
 from algosdk.future.transaction import AssetConfigTxn, AssetTransferTxn
 from util import sign_and_send, balance_formatter
 
-client = algod.AlgodClient(algod_token, algod_address)
+client = algod.AlgodClient(algod_token, algod_address, headers={'User-Agent': 'DoYouLoveMe?'})
 
 def create(passphrase=None):
 	"""
@@ -26,7 +26,7 @@ def create(passphrase=None):
 
 def optin(passphrase=None):
 	"""
-	Creates an unsigned opt-in transaction for the specified asset id and 
+	Creates an unsigned opt-in transaction for the specified asset id and
 	address. Uses current network params.
 	"""
 	params = client.suggested_params()
@@ -39,7 +39,7 @@ def optin(passphrase=None):
 
 def transfer(passphrase=None):
 	"""
-	Creates an unsigned transfer transaction for the specified asset id, to the 
+	Creates an unsigned transfer transaction for the specified asset id, to the
 	specified address, for the specified amount.
 	"""
 	amount = 6000
@@ -48,7 +48,7 @@ def transfer(passphrase=None):
 	if passphrase:
 		txinfo = sign_and_send(txn, passphrase, client)
 		formatted_amount = balance_formatter(amount, asset_id, client)
-		print("Transferred {} from {} to {}".format(formatted_amount, 
+		print("Transferred {} from {} to {}".format(formatted_amount,
 			creator_address, receiver_address))
 		print("Transaction ID Confirmation: {}".format(txinfo.get("tx")))
 	else:

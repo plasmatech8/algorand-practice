@@ -78,3 +78,32 @@ create(creator_passphrase)
 TODO: Need to connect to an AlgoD node somehow
 
 ...
+
+
+```py
+import config
+import main
+
+main.create(config.creator_passphrase)
+# Confirmed TXID: LBMIHUDE6VH5VOG73FVCEAPYWB5ULNRARXMFGWQ4K6ZDUCHDO46Q
+# Asset ID: 20158270
+
+main.check_holdings(20158270, "BOFH7UOCKFDBJY56R3IJCEFPQUIL34XTXDPARL4YBZOLAITY75UH5DYEEI")
+# Account BOFH7UOCKFDBJY56R3IJCEFPQUIL34XTXDPARL4YBZOLAITY75UH5DYEEI has 8888888.88 Bork.
+
+main.check_holdings(20158270, "Q7B33FEJ522NQFF5EXO4ESC5ABVX6ZIYFJFZZUC5TBVW24V63KTAIL4ETI")
+# Account Q7B33FEJ522NQFF5EXO4ESC5ABVX6ZIYFJFZZUC5TBVW24V63KTAIL4ETI must opt-in to Asset ID 20158270.
+
+main.transfer("bad passphrase")
+main.transfer("spirit start collect visual life post nest must tube before tuition parade armor raccoon example bicycle diagram genuine fatal flock dinosaur bubble slogan abstract wide")
+main.optin("spirit start collect visual life post nest must tube before tuition parade armor raccoon example bicycle diagram genuine fatal flock dinosaur bubble slogan abstract wide")
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+#   File "/home/mark/Code/algorand-practice/02_create_laylacoin_on_testnet/create-layla-coin/main.py", line 47, in transfer
+#     txn = AssetTransferTxn(sender=creator_address, sp=params, receiver=receiver_address, amt=amount, index=asset_id)
+#   File "/home/mark/anaconda3/lib/python3.7/site-packages/algosdk/future/transaction.py", line 960, in __init__
+#     self.index = self.creatable_index(index, required=True)
+#   File "/home/mark/anaconda3/lib/python3.7/site-packages/algosdk/future/transaction.py", line 270, in creatable_index
+#     raise IndexError("Required an index")
+# IndexError: Required an index
+```

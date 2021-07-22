@@ -6,7 +6,7 @@ receiver_address = "Q7B33FEJ522NQFF5EXO4ESC5ABVX6ZIYFJFZZUC5TBVW24V63KTAIL4ETI"
 receiver_passphrase = "square exhibit spatial pilot prepare bind tree divide try pepper indoor goddess update leave thank rally pond tumble habit panic impose quiz century ability main"
 
 # Credentials to connect through an algod client
-algod_address = "http://localhost:4001"
+algod_address = "https://testnet.algoexplorerapi.io"#"http://localhost:4001"
 algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
 # Details of the asset creation transaction
