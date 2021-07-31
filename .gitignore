@@ -1,1 +1,4 @@
 .vscode
+*.tok
+*.txn
+*.txn.rej
