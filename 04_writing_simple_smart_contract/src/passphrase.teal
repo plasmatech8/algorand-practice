@@ -24,5 +24,8 @@ txn Receiver
 ==
 &&
 
-int 1
-&&
+// Some crap to make the contract different from the existing one (ID based on hash of opcodes)
+// int 1
+// &&
+// int 1
+// &&

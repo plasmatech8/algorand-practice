@@ -1,6 +1,6 @@
 # Writing a Simple Smart Contract
 
-We will create a TEAL contract and place it in our node under: `~/node/teal/passphrase.teal`
+We will create a TEAL contract and place it in our node under: ~~`~/node/teal/passphrase.teal`~~ doesn't matter where it is.
 
 We will check a passphrase.
 
@@ -43,6 +43,8 @@ This will generate a `.teal.tok` file, and diplay an Algorand address: RZ2CUMV2V
 
 Now lets go to https://bank.testnet.algorand.network/ and give this address some ALGO.
 
+IF THE CONTRACT IS NOT FUNDED, IT WILL NOT WORK/EXIST.
+
 Check balance:
 ```bash
 goal account balance -a  RZ2CUMV2VG3NCVFEVUVHVBYQUABQIBWAT3AC736Y6YL7PPDNAD7K3TVNAI
@@ -66,6 +68,7 @@ goal clerk send \
     -t STF6TH6PKINM4CDIQHNSC7QEA4DM5OJKKSACAPWGTG776NWSQOMAYVGOQE \
     -o out.txn
     #-d ~/node/testnetdata
+    # STF6TH6PKINM4CDIQHNSC7QEA4DM5OJKKSACAPWGTG776NWSQOMAYVGOQE is some random address sending an amount
 ```
 
 Now lets test the contract with a test transaction:
