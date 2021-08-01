@@ -3,3 +3,4 @@
 *.txn
 *.txn.rej
 *.addr
+__pycache__
