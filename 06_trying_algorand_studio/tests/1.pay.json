@@ -1,0 +1,17 @@
+{
+  "name": "pay",
+  "accounts": [],
+  "txns": [
+    {
+      "type": "pay",
+      "params": {
+        "from": "first",
+        "to": "second",
+        "amount": 1
+      },
+      "signers": [
+        "first"
+      ]
+    }
+  ]
+}

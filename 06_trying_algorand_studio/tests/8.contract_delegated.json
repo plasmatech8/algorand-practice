@@ -1,0 +1,30 @@
+{
+  "name": "delegated approval",
+  "accounts": [],
+  "txns": [
+    {
+      "type": "pay",
+      "params": {
+        "from": "Bob",
+        "to": "Alice",
+        "amount": 0.001
+      },
+      "flatFee": true,
+      "signers": ["Bob"]
+    },
+    {
+      "type": "pay",
+      "params": {
+        "from": "Alice",
+        "to": "Charlie",
+        "amount": 1,
+        "lease": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE="
+      },
+      "flatFee": true,
+      "lsig": {
+        "program": "base64:../contract.teal.tok",
+        "signer": "Alice"
+      }
+    }
+  ]
+}
