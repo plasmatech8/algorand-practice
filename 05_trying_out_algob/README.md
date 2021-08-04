@@ -6,6 +6,7 @@ See:
 * AlgoB CLI: https://github.com/scale-it/algo-builder
 * AlgoB Templates: https://github.com/scale-it/algo-builder-templates
 
+https://algobuilder.dev/guide/README#algo-builder-docs
 
 Available packages:
 * algob: a framework and CLI of the Algo Builder Suite
