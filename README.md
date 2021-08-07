@@ -6,6 +6,9 @@ Node/environment setup:
 * See [04_writing_simple_smart_contract/NODE_SETUP.md](04_writing_simple_smart_contract/NODE_SETUP.md)
 * See [10_create_private_network](10_create_private_network)
 
+Command line SDK:
+* See [04_writing_simple_smart_contract](04_writing_simple_smart_contract) (an example smart contract with testing + deployment)
+
 Python SDK:
 * See [03_algorand_developer_docs/01_start_building.md](03_algorand_developer_docs/01_start_building.md) (some docs + simple examples)
 * See [07_working_with_ASA_with_python/README.md](07_working_with_ASA_with_python/README.md) (example of python code for creating an asset, changing manager, opting-in)

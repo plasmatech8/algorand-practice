@@ -1,6 +1,7 @@
 from pyteal import (App, Assert, Bytes, Global, Int, Mode, Txn,
                     Btoi, Return, And, If, Seq, Cond, OnComplete, compileTeal)
 
+
 def approval_program():
 
     # Initialize program data
@@ -25,8 +26,9 @@ def approval_program():
         # Check voter has 'voted' in their local state
         get_vote_of_sender,
         If(And(Global.round() <= App.globalGet(Bytes("VoteEnd")), get_vote_of_sender.hasValue()),
-            App.globalPut(get_vote_of_sender.value(), App.globalGet(get_vote_of_sender.value()) - Int(1))
-        ),
+            App.globalPut(get_vote_of_sender.value(), App.globalGet(
+                get_vote_of_sender.value()) - Int(1))
+           ),
         Return(Int(1))
     ])
 
@@ -50,7 +52,7 @@ def approval_program():
         # Fail if account has already voted
         If(get_vote_of_sender.hasValue(),
             Return(Int(0))
-        ),
+           ),
         # Increment the global tally variable for 'choice'
         App.globalPut(choice, choice_tally + Int(1)),
         # Set the account 'voted' to 'choice'
@@ -78,8 +80,9 @@ def clear_state_program():
         get_vote_of_sender,
         # If the vote has not finished and the voter has voted, remove the vote from tally counter for the 'choice'
         If(And(Global.round() <= App.globalGet(Bytes("VoteEnd")), get_vote_of_sender.hasValue()),
-            App.globalPut(get_vote_of_sender.value(), App.globalGet(get_vote_of_sender.value()) - Int(1))
-        ),
+            App.globalPut(get_vote_of_sender.value(), App.globalGet(
+                get_vote_of_sender.value()) - Int(1))
+           ),
         Return(Int(1))
     ])
     return program
@@ -92,3 +95,7 @@ def compile_all():
     with open('vote_clear_state.teal', 'w') as f:
         compiled = compileTeal(clear_state_program(), Mode.Application)
         f.write(compiled)
+
+
+if __name__ == '__main__':
+    compile_all()

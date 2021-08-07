@@ -32,3 +32,60 @@ There are two ways for an account to opt-out of a contract: `closing_out` and `c
 `clearing_state_program` - clears account state.
 
 I do not know how to deploy this.
+
+
+## Cont.
+
+Compiling and deploying to a private network (see 10_create_private_network)
+
+```bash
+# Compile to teal
+python approval_program.py
+
+# Compile to teal.tok
+goal clerk compile vote_approval.teal -d ~/net1/Node
+goal clerk compile vote_clear_state.teal -d ~/net1/Node
+# vote_approval address: JXT7N56YFSSUV2MQCJU4MVFRB2QKEIHA2FKCYZXXDSIVWV3LOQO7TGTYT4
+# vote_clear_state address: 7BF7UDFEXCBEQJRMELOWO5DL3W3KLDZCVQ7EIYAWJ7PIRRCCEKVSUWDDWY
+
+# Find an account to send the transaction
+goal account list -d ~/net1/Node
+
+#TODO: goal app create
+
+# Send txn
+# goal app send \
+#     -a 30000 \
+#     --from-program vote_approval.teal  \
+#     -c GOGVMSAC37IP5HD3LUTVHHC5WGAS5MMGPGNKNDHQB25OZN7AP4FPKIP3DE \
+#     -t GOGVMSAC37IP5HD3LUTVHHC5WGAS5MMGPGNKNDHQB25OZN7AP4FPKIP3DE \
+#     -o vote_approval.out.txn \
+#     -d ~/net1/Node
+# goal clerk send \
+#     -a 30000 \
+#     --from-program vote_clear_state.teal  \
+#     -c GOGVMSAC37IP5HD3LUTVHHC5WGAS5MMGPGNKNDHQB25OZN7AP4FPKIP3DE \
+#     -t GOGVMSAC37IP5HD3LUTVHHC5WGAS5MMGPGNKNDHQB25OZN7AP4FPKIP3DE \
+#     -o vote_clear_state.out.txn \
+#     -d ~/net1/Node
+# vote_approval ID: ???????
+# vote_clear_state ID: ????????
+
+# goal clerk send \
+#     -a 30000 \
+#     -f GOGVMSAC37IP5HD3LUTVHHC5WGAS5MMGPGNKNDHQB25OZN7AP4FPKIP3DE \
+#     -t JXT7N56YFSSUV2MQCJU4MVFRB2QKEIHA2FKCYZXXDSIVWV3LOQO7TGTYT4 \
+#     -o out1.txn \
+#     -d ~/net1/Node
+# goal clerk send \
+#     -a 30000 \
+#     -f GOGVMSAC37IP5HD3LUTVHHC5WGAS5MMGPGNKNDHQB25OZN7AP4FPKIP3DE \
+#     -t 7BF7UDFEXCBEQJRMELOWO5DL3W3KLDZCVQ7EIYAWJ7PIRRCCEKVSUWDDWY \
+#     -o out2.txn \
+#     -d ~/net1/Node
+#
+# View app
+# goal app info <ID>
+```
+
+
