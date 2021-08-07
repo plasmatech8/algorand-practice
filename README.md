@@ -1,5 +1,8 @@
 # algorand-practice
 
+TODO:
+* Summary of commands / code snippets for each thing
+
 ## Summary
 
 Node/environment setup:
