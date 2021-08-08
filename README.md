@@ -67,3 +67,7 @@ Pyteal programming:
 **10_create_private_network**:
 * Creating a private net including a participation + relay node
 * Cool!
+
+11_example_voting_stateful_smart_contract:
+* Create a voting app with TEAL and `goal` commands
+* Incomplete

@@ -127,6 +127,9 @@ byte "voted"
 app_local_get_ex
 bnz failed
 
+// ------------------------------ TODO: continue refactoring/commenting/understanding code below
+
+
 // read existing vote candidate
 // i think i need a pop here
 pop
