@@ -11,6 +11,7 @@ Node/environment setup:
 
 Command line SDK:
 * See [04_writing_simple_smart_contract](04_writing_simple_smart_contract) (an example smart contract with testing + deployment)
+* See [11_example_voting_stateful_smart_contract](an (unfinished) example voting application + deployment/usage `goal` commands)
 
 Python SDK:
 * See [03_algorand_developer_docs/01_start_building.md](03_algorand_developer_docs/01_start_building.md) (some docs + simple examples)
@@ -19,9 +20,10 @@ Python SDK:
 TEAL programming:
 * See [01_algorand_basics/01_algorand_smart_contracts_and_teal.md](01_algorand_basics/01_algorand_smart_contracts_and_teal.md) (some docs + simple examples)
 * See [04_writing_simple_smart_contract](04_writing_simple_smart_contract) (an example smart contract with testing + deployment)
+* See [11_example_voting_stateful_smart_contract](an (unfinished) example voting application + deployment/usage `goal` commands)
 
 Pyteal programming:
-* See [08_pyteal_approval_program](08_pyteal_approval_program)
+* See [08_pyteal_approval_program](08_pyteal_approval_program) (a voting application)
 * See [09_simple_npc_game_stateful](09_simple_npc_game_stateful)
 
 ## Tutorials
