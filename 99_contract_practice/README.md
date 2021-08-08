@@ -7,9 +7,13 @@ To look into:
 * Sending ASAs from contract to user
 * Permissions (ensure that user is this person)
 
+Task: Create `CHEATSHEET.md`
+
 Task: Make snippets below demonstrating each tasks.
 
 Task: Make section for GOAL and PythonSDK
+
+Task: Make a `Makefile` which makes it easy to setup a private network + deploy + test/interact
 
 To check out:
 * Algo Contract General
