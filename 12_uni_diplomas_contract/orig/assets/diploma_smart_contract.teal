@@ -1,0 +1,104 @@
+#pragma version 3
+txn ApplicationID
+int 0
+==
+bnz l16
+txn OnCompletion
+int DeleteApplication
+==
+bnz l15
+txn OnCompletion
+int UpdateApplication
+==
+bnz l14
+txn OnCompletion
+int OptIn
+==
+bnz l13
+txn OnCompletion
+int CloseOut
+==
+bnz l12
+txna ApplicationArgs 0
+byte "issue_diploma"
+==
+bnz l11
+txna ApplicationArgs 0
+byte "revoke_diploma"
+==
+bnz l10
+txna ApplicationArgs 0
+byte "reassign_registrar"
+==
+bnz l9
+err
+l9:
+txn Sender
+byte "registrar"
+app_global_get
+==
+assert
+txn NumAppArgs
+int 1
+==
+assert
+byte "registrar"
+txna Accounts 1
+app_global_put
+int 1
+return
+l10:
+txn Sender
+byte "registrar"
+app_global_get
+==
+assert
+txn NumAppArgs
+int 1
+==
+assert
+int 1
+byte "diploma"
+app_local_del
+int 1
+return
+l11:
+txn Sender
+byte "registrar"
+app_global_get
+==
+assert
+txn NumAppArgs
+int 2
+==
+assert
+int 1
+byte "diploma"
+txna ApplicationArgs 1
+app_local_put
+int 1
+return
+l12:
+int 1
+return
+l13:
+int 1
+return
+l14:
+txn Sender
+byte "registrar"
+app_global_get
+==
+return
+l15:
+txn Sender
+byte "registrar"
+app_global_get
+==
+return
+l16:
+byte "registrar"
+txn Sender
+app_global_put
+int 1
+return
