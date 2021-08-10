@@ -1,0 +1,12 @@
+registrar: "alice"
+
+alice: # Y47YD46RYZ23OONG7XTEP7K7NLUBZYVCHSFHRJTWB4TIBV6RUNHCNECVI4
+  mnemonic: "front asset place member hole egg hand raven dwarf bind what very wrestle hybrid shield cargo acquire lamp start boost decade arrow cash about version"
+
+bob: # I5FXWJNS2P5UTGORU7TESKUIHLPQHHMZDEDUNGHL4P3DGVTDJDQK7C5ZPA
+  mnemonic: "two inspire daughter body clump panic useless wash shoot law weird tool battle shadow blade galaxy enter gap sport wing cruise region ocean abandon trade"
+
+charlie: # 6IE2PKK2MT6CIPP5JQVT7YOTQU2X6QPYM5BIVAGN2IJU52JZ7FG4A7MJNU
+  mnemonic: "tube pizza typical wish gasp base shove post collect episode patch develop scare tag flame post capable chief ranch aware crew exotic fat above elder"
+
+APP_ID: -1

@@ -13,7 +13,7 @@ Task: Make snippets below demonstrating each tasks.
 
 Task: Make section for GOAL and PythonSDK
 
-Task: Make a `Makefile` which makes it easy to setup a private network + deploy + test/interact
+Task: Make template + a `Makefile` which makes it easy to setup a private network + deploy + test/interact
 
 To check out:
 * Algo Contract General
