@@ -1,5 +1,7 @@
 # Issuing university diplomas on the Algorand blockchain
 
+https://developer.algorand.org/tutorials/issueing-university-diplomas-on-the-algorand-blockchain/#1-roles
+
 Note clear_state = for deleting app, close_out = for opting-out
 
 Repository notes:
