@@ -30,3 +30,7 @@ Basic types of DApps:
 * Certificate Issuement Apps
 * ICO Apps
 * Asset Creator Apps
+* Loan Collateral Escrow Account (Bob gives loan to alice, if not paid back after time, takes collateral asset)
+* Subscription Service
+* Auction Apps
+* Pool shareholding token
