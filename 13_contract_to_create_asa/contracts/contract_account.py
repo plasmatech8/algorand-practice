@@ -6,7 +6,8 @@ def contract_account(app_id):
     """
     A stateless contract acting as an escrow account.
     """
-    # check that the user is not closing their account and moving funds to a new one
+    # normally this would check that the user is not closing their account and moving funds to a new one
+    # !!! Here we are making sure that no-one steals the escrow account funds !!!
     asset_close_to_check = Txn.asset_close_to() == Global.zero_address()
 
     # check that the transaction does not set a new spending key / auth address
@@ -27,7 +28,7 @@ def contract_account(app_id):
     # fund 1 asa that has been created by escrow
     on_fund_asa = Seq([
         Assert(Txn.type_enum() == TxnType.AssetTransfer),
-        Assert(Txn.asset_sender() == Global.zero_address()),  # zero == this address (I assume)
+        Assert(Txn.asset_sender() == Global.zero_address()),  # To Stop Clawback (see notes)
         Assert(asset_close_to_check),
         Assert(Txn.asset_amount() == Int(1)),
         Int(1)

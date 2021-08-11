@@ -34,9 +34,6 @@ goal app read --global --app-id $APP_ID
 goal app read --local --app-id $APP_ID --from $PERSONAL_ADDRESS
 ```
 
-Note: to perform an action on behalf of a escrow contract, a transaction needs to be signed by
-passing in the contract program as the signer.
-
 ## Introduction
 
 ASAs are usually created by a user account, but here we will do so using a stateful smart contract
@@ -64,3 +61,26 @@ Application allows you to create assets with name: `AppASA-X`
 
 Allows anyone to get 1 ASA from the escrow account.
 
+## Notes
+
+
+To perform an action on behalf of a escrow contract, a transaction needs to be signed by
+passing in the contract program as the signer.
+* i.e. `goal clerk sign -i split-1.tx -p ${TEAL_ESCROW} -o signout-1.tx`
+
+We need to make sure our escrow contract checks that the user is not trying to steal funds using
+the `asset_close_to` address! - Which will remove the contract and migrate funds to a new address.
+* i.e. `asset_close_to_check = Txn.asset_close_to() == Global.zero_address()`
+
+
+We also need to make sure that the asset sender is the zero address (so it is not a clawback
+transaction). It must be empty to ensure that assets cannot be revoked.
+* i.e. `Txn.asset_sender() == Global.zero_address()`
+* AssetTransferTx can be used for transferring assets and for clawback
+  * **sender** == Where funds are witdrawn and fees are paid by.
+  * **assetSender** == if present, the address where funds are withdrawn. Replaces sender, and makes sender a clawback address,
+  * FOR REGULAR TRANSFERS, KEEP `assetSender` EMPTY
+
+We also need to make sure that the rekey addres is the zero address, so the user is not changing
+the auth address / spending key of the contract.
+* i.e. `rekey_check = Txn.rekey_to() == Global.zero_address()`
