@@ -24,3 +24,9 @@ To check out:
   * [Stateful Smart Contracts](https://developer.algorand.org/docs/features/asc1/stateful/#using-assets-in-smart-contracts)
   * [Teal V3](https://developer.algorand.org/articles/introducing-teal-version-3/?query=atomi)
   * [Stateless contract modes](https://developer.algorand.org/docs/features/asc1/stateless/modes/#contract-account)
+
+Basic types of DApps:
+* Voting Apps
+* Certificate Issuement Apps
+* ICO Apps
+* Asset Creator Apps
