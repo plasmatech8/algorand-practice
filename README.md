@@ -2,6 +2,7 @@
 
 TODO:
 * Summary of commands / code snippets for each thing
+* Check out templates https://developer.algorand.org/docs/reference/teal/templates/dynamic_fee/
 
 ## Summary
 
