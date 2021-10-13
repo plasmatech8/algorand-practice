@@ -108,29 +108,62 @@ export default {
       console.log(this.sendTxnForm);
       // Contruct transaction
       const suggestedParams = await this.algodClient.getTransactionParams().do();
+      console.log(suggestedParams)
+
+      /*
+      It is slightly annoying that AlgoSigner only accepts algosdk objects.
+      */
+
+      // Method 1
+
+      // Contruct transaction
       const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
         from: this.sendTxnForm.address,
         to: this.sendTxnForm.to,
         amount: +this.sendTxnForm.amount,
-        note: this.note,
+        note: utf8ToUint8Array(this.sendTxnForm.note),
         suggestedParams: {...suggestedParams}
       });
-      console.log('transaction constructed');
       console.log(txn);
+      console.log('transaction constructed');
       // Sign transaction
       const txn_b64 = window.AlgoSigner.encoding.msgpackToBase64(txn.toByte());
       const signedTxns = await window.AlgoSigner.signTxn([{txn: txn_b64}]);
+      console.log(txn_b64)
+      console.log(signedTxns[0])
       console.log('transaction signed');
-      console.log(signedTxns)
       // Send transaction
       const sentTxn = await window.AlgoSigner.send({
         ledger: 'TestNet',
         tx: signedTxns[0].blob
       });
-      console.log('transaction sent');
       console.log(sentTxn);
+      console.log('transaction sent');
 
-      // Wait for transaction
+      // Method 2
+
+      // // Contruct transaction
+      // const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+      //   from: this.sendTxnForm.address,
+      //   to: this.sendTxnForm.to,
+      //   amount: +this.sendTxnForm.amount,
+      //   note: utf8ToUint8Array(this.sendTxnForm.note),
+      //   suggestedParams: {...suggestedParams}
+      // });
+      // console.log(txn);
+      // console.log('transaction constructed');
+      // // Sign transaction
+      // const txn_b64 = window.AlgoSigner.encoding.msgpackToBase64(txn.toByte());
+      // const signedTxns = await window.AlgoSigner.signTxn([{txn: txn_b64}]);
+      // console.log(signedTxns)
+      // console.log('transaction signed');
+      // // Send transaction
+      // const signedTxnBlob = base64ToUint8Array(signedTxns[0].blob)
+      // const sentTxn = await this.algodClient.sendRawTransaction(signedTxnBlob).do();
+      // console.log(sentTxn);
+      // console.log('transaction sent');
+
+      // // Wait for transaction
       this.pendingTxnId = sentTxn.txId;
       try {
         const completedTxnInfo = await waitForConfirmation(this.algodClient, this.pendingTxnId, 10)
@@ -183,6 +216,23 @@ const waitForConfirmation = async function (algodClient, txId, timeout) {
     }
     throw new Error("Transaction " + txId + " not confirmed after " + timeout + " rounds!");
 };
+
+// alt: new Uint8Array(Buffer.from('Hello World'))
+/* eslint-disable no-unused-vars */
+function utf8ToUint8Array (str) {
+  const enc = new TextEncoder() // always utf-8
+  return enc.encode(str)
+}
+
+function base64ToUint8Array (base64) {
+    var binary_string = window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
+}
 </script>
 
 <style>

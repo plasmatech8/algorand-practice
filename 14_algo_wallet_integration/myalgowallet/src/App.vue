@@ -92,28 +92,58 @@ export default {
     },
     async submitTxn() {
       console.log(this.sendTxnForm);
-      // Construct Transaction
       const suggestedParams = await this.algodClient.getTransactionParams().do();
       console.log(suggestedParams)
+
+      /*
+      It is annoying that MyAlgo only accepts raw transaction objects.
+      */
+
+      // Method 1
+
+      // Construct Transaction
       const txn = {
         ...suggestedParams,
         type: 'pay',
         from: this.sendTxnForm.address,
         to:  this.sendTxnForm.to,
         amount: +this.sendTxnForm.amount,
-        note: this.sendTxnForm.note,
+        note: utf8ToUint8Array(this.sendTxnForm.note),
       };
-      console.log('transaction constructed');
       console.log(txn);
-      // Sign Transaction
+      console.log('transaction constructed');
+      // Sign transaction
       const signedTxn = await this.myAlgoWallet.signTransaction(txn);
+      console.log(signedTxn)
       console.log('transaction signed');
-      console.log(signedTxn);
-      // Send Transaction
+      // Send transaction
       const sentTxn = await this.algodClient.sendRawTransaction(signedTxn.blob).do();
-      console.log('transaction sent');
       console.log(sentTxn);
+      console.log('transaction sent');
+
+      // Method 2
+
+      // // Construct Transaction DOES NOT WORK
+      // /* const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+      //   from: this.sendTxnForm.address,
+      //   to: this.sendTxnForm.to,
+      //   amount: +this.sendTxnForm.amount,
+      //   note: utf8ToUint8Array(this.sendTxnForm.note),
+      //   suggestedParams: {...suggestedParams}
+      // }); */
+      // console.log(txn);
+      // console.log('transaction constructed');
+      // // Sign Transaction
+      // const signedTxn = await this.myAlgoWallet.signTransaction(txn);
+      // console.log(signedTxn);
+      // console.log('transaction signed');
+      // // Send Transaction
+      // const sentTxn = await this.algodClient.sendRawTransaction(signedTxn.blob).do();
+      // console.log(sentTxn);
+      // console.log('transaction sent');
+
       // Wait for transaction
+
       this.pendingTxnId = sentTxn.txId;
       try {
         const completedTxnInfo = await waitForConfirmation(this.algodClient, this.pendingTxnId, 10)
@@ -166,6 +196,23 @@ const waitForConfirmation = async function (algodClient, txId, timeout) {
     }
     throw new Error("Transaction " + txId + " not confirmed after " + timeout + " rounds!");
 };
+
+// alt: new Uint8Array(Buffer.from('Hello World'))
+/* eslint-disable no-unused-vars */
+function utf8ToUint8Array (str) {
+  const enc = new TextEncoder() // always utf-8
+  return enc.encode(str)
+}
+
+function base64ToUint8Array (base64) {
+    var binary_string = window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
+}
 </script>
 
 <style>
