@@ -154,8 +154,9 @@ export default {
       console.log(signedTxns)
       console.log('transaction signed');
       // Send transaction
-      const signedTxnBlob = base64ToUint8Array(signedTxns[0].blob)
-      const sentTxn = await this.algodClient.sendRawTransaction(signedTxnBlob).do();
+      const signedTxn = { txId: signedTxns[0].blob, blob: base64ToUint8Array(signedTxns[0].blob) }
+      console.log(signedTxn)
+      const sentTxn = await this.algodClient.sendRawTransaction(signedTxn.blob).do();
       console.log(sentTxn);
       console.log('transaction sent');
       */
