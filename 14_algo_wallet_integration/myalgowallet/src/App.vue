@@ -95,11 +95,7 @@ export default {
       const suggestedParams = await this.algodClient.getTransactionParams().do();
       console.log(suggestedParams)
 
-      /*
-      It is annoying that MyAlgo only accepts raw transaction objects.
-      */
-
-      // Method 1
+      // Method 1 (Default method: raw object, sign with myalgo, send with algod client)
 
       // Construct Transaction
       const txn = {
@@ -121,26 +117,30 @@ export default {
       console.log(sentTxn);
       console.log('transaction sent');
 
-      // Method 2
-
-      // // Construct Transaction DOES NOT WORK
-      // /* const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
-      //   from: this.sendTxnForm.address,
-      //   to: this.sendTxnForm.to,
-      //   amount: +this.sendTxnForm.amount,
-      //   note: utf8ToUint8Array(this.sendTxnForm.note),
-      //   suggestedParams: {...suggestedParams}
-      // }); */
-      // console.log(txn);
-      // console.log('transaction constructed');
-      // // Sign Transaction
-      // const signedTxn = await this.myAlgoWallet.signTransaction(txn);
-      // console.log(signedTxn);
-      // console.log('transaction signed');
-      // // Send Transaction
-      // const sentTxn = await this.algodClient.sendRawTransaction(signedTxn.blob).do();
-      // console.log(sentTxn);
-      // console.log('transaction sent');
+      // Method 2 (algosdk class, sign with myalgo, send with algod client)
+      /*
+      // Construct Transaction
+      const txn = new algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+        suggestedParams: suggestedParams,
+        from: this.sendTxnForm.address,
+        to:  this.sendTxnForm.to,
+        amount: +this.sendTxnForm.amount,
+        note: utf8ToUint8Array(this.sendTxnForm.note)
+      });
+      console.log(txn);
+      console.log('transaction constructed');
+      // Sign Transaction
+      const signedTxn = await this.myAlgoWallet.signTransaction(txn.toByte());
+      // console.log(txn.toByte())
+      // console.log(txn.bytesToSign())
+      // console.log(txn.get_obj_for_encoding())
+      console.log(signedTxn);
+      console.log('transaction signed');
+      // Send Transaction
+      const sentTxn = await this.algodClient.sendRawTransaction(signedTxn.blob).do();
+      console.log(sentTxn);
+      console.log('transaction sent');
+      */
 
       // Wait for transaction
 

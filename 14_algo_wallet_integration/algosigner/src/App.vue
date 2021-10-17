@@ -110,11 +110,7 @@ export default {
       const suggestedParams = await this.algodClient.getTransactionParams().do();
       console.log(suggestedParams)
 
-      /*
-      It is slightly annoying that AlgoSigner only accepts algosdk objects.
-      */
-
-      // Method 1
+      // Method 1 (Default method: algosdk class, sign with algosigner, send with algosigner)
 
       // Contruct transaction
       const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
@@ -140,28 +136,29 @@ export default {
       console.log(sentTxn);
       console.log('transaction sent');
 
-      // Method 2
-
-      // // Contruct transaction
-      // const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
-      //   from: this.sendTxnForm.address,
-      //   to: this.sendTxnForm.to,
-      //   amount: +this.sendTxnForm.amount,
-      //   note: utf8ToUint8Array(this.sendTxnForm.note),
-      //   suggestedParams: {...suggestedParams}
-      // });
-      // console.log(txn);
-      // console.log('transaction constructed');
-      // // Sign transaction
-      // const txn_b64 = window.AlgoSigner.encoding.msgpackToBase64(txn.toByte());
-      // const signedTxns = await window.AlgoSigner.signTxn([{txn: txn_b64}]);
-      // console.log(signedTxns)
-      // console.log('transaction signed');
-      // // Send transaction
-      // const signedTxnBlob = base64ToUint8Array(signedTxns[0].blob)
-      // const sentTxn = await this.algodClient.sendRawTransaction(signedTxnBlob).do();
-      // console.log(sentTxn);
-      // console.log('transaction sent');
+      // Method 2 (algosdk class, sign with algosigner, send with algod client)
+      /*
+      // Contruct transaction
+      const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+        from: this.sendTxnForm.address,
+        to: this.sendTxnForm.to,
+        amount: +this.sendTxnForm.amount,
+        note: utf8ToUint8Array(this.sendTxnForm.note),
+        suggestedParams: {...suggestedParams}
+      });
+      console.log(txn);
+      console.log('transaction constructed');
+      // Sign transaction
+      const txn_b64 = window.AlgoSigner.encoding.msgpackToBase64(txn.toByte());
+      const signedTxns = await window.AlgoSigner.signTxn([{txn: txn_b64}]);
+      console.log(signedTxns)
+      console.log('transaction signed');
+      // Send transaction
+      const signedTxnBlob = base64ToUint8Array(signedTxns[0].blob)
+      const sentTxn = await this.algodClient.sendRawTransaction(signedTxnBlob).do();
+      console.log(sentTxn);
+      console.log('transaction sent');
+      */
 
       // // Wait for transaction
       this.pendingTxnId = sentTxn.txId;
